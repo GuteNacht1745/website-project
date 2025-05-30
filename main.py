@@ -7,18 +7,6 @@ from wtforms.validators import DataRequired, URL
 import csv
 from dotenv import load_dotenv
 import os
-'''
-Red underlines? Install the required packages first: 
-Open the Terminal in PyCharm (bottom left). 
-
-On Windows type:
-python -m pip install -r requirements.txt
-
-On MacOS type:
-pip3 install -r requirements.txt
-
-This will install the packages from requirements.txt for this project.
-'''
 
 load_dotenv('secret.env')
 SECRET_KEY = os.getenv('SECRET_KEY')
@@ -39,12 +27,6 @@ class CafeForm(FlaskForm):
     power_outlet_rating = SelectField(label = 'Power socket availability', choices = [(i , i * '🔌') for i in range(1,6)], coerce = int)
     submit = SubmitField('Submit')
 
-# Exercise:
-# add: Location URL, open time, closing time, coffee rating, wifi rating, power outlet rating fields
-# make coffee/wifi/power a select element with choice of 0 to 5.
-#e.g. You could use emojis ☕️/💪/✘/🔌
-# make all fields required except submit
-# use a validator to check that the URL field has a URL entered.
 # ---------------------------------------------------------------------------
 
 
@@ -70,9 +52,6 @@ def add_cafe():
             writer.writerow(new_coffee)
 
         return redirect(url_for('cafes'))
-    # Exercise:
-    # Make the form write a new row into cafe-data.csv
-    # with   if form.validate_on_submit()
     return render_template('add.html', form=form)
 
 
